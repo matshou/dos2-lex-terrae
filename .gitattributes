@@ -1,0 +1,4 @@
+*.shd binary
+*.lsx binary
+
+*.txt text eol=crlf
