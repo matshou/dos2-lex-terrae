@@ -1,4 +1,4 @@
 *.shd binary
-*.lsx binary
 
-*.txt text eol=crlf
+*.lsx text eol=lf
+*.txt text eol=lf
