@@ -16,7 +16,6 @@ DB_IceKingStatuses(4,"ICE_SKIN");
 DB_IceKingStatuses(5,"FROST_AURA");
 DB_IceKingStatuses(6,"HOLY_WATER");
 
-
 DB_LeechableStatuses("REGENERATION");
 DB_LeechableStatuses("FORTIFIED");
 DB_LeechableStatuses("MAGIC_SHELL");
@@ -45,103 +44,6 @@ DB_LeechableStatuses("MEND_METAL");
 DB_LeechableStatuses("ICE_SKIN");
 DB_LeechableStatuses("FIRE_SKIN");
 KBSECTION
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player,"TALENTBOOK_Packmule_844fe20e-673d-4463-9d7c-42637f449dbb",_)
-AND
-CharacterGetTalentPoints(_Player,(INTEGER)_Int)
-AND
-_Int > 0
-AND
-NOT DB_TalentsUnlocked(_Player,"Carry")
-THEN
-CharacterAddTalentPoint(_Player,-1);
-CharacterAddTalent(_Player,"Carry");
-CharacterAddAbility(_Player,"Perseverance",3);
-DB_TalentsUnlocked(_Player,"Carry");
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player,"TALENTBOOK_NaturalConductor_0da3c3fc-713d-4da5-ae85-088cb3b33a23",_)
-AND
-CharacterGetTalentPoints(_Player,(INTEGER)_Int)
-AND
-_Int > 0
-AND
-NOT DB_TalentsUnlocked(_Player,"NaturalConductor")
-AND
-CharacterGetAbility(_Player,"Aerothurge",_Value)
-AND
-_Value > 5
-THEN
-CharacterAddTalentPoint(_Player,-1);
-CharacterAddTalent(_Player,"NaturalConductor");
-DB_TalentsUnlocked(_Player,"NaturalConductor");
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player,"TALENTBOOK_Fleetfooted_63f45fef-f3ba-4e70-96cf-60bf415a34c4",_)
-AND
-CharacterGetTalentPoints(_Player,(INTEGER)_Int)
-AND
-_Int > 0
-AND
-NOT DB_TalentsUnlocked(_Player,"ActionPoints")
-THEN
-CharacterAddTalentPoint(_Player,-1);
-CharacterAddTalent(_Player,"ActionPoints");
-DB_TalentsUnlocked(_Player,"ActionPoints");
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player,"TALENTBOOK_StandYourGround_3b247b91-6a26-4217-bb57-299b8953d519",_)
-AND
-CharacterGetTalentPoints(_Player,(INTEGER)_Int)
-AND
-_Int > 0
-AND
-NOT DB_TalentsUnlocked(_Player,"StandYourGround")
-AND
-CharacterGetAbility(_Player,"WarriorLore",_Value)
-AND
-_Value > 5
-AND
-CharacterHasTalent(_Player,"Escapist",0)
-THEN
-CharacterAddTalentPoint(_Player,-1);
-CharacterAddTalent(_Player,"StandYourGround");
-CharacterAddTalent(_Player,"Courageous");
-DB_TalentsUnlocked(_Player,"StandYourGround");
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player,"TALENTBOOK_RainbowMage_ae27fc6c-7b80-41e8-a0dd-dfd2f21839bc",_)
-AND
-CharacterGetTalentPoints(_Player,(INTEGER)_Int)
-AND
-_Int > 0
-AND
-NOT DB_TalentsUnlocked(_Player,"RainbowMage")
-THEN
-CharacterAddTalentPoint(_Player,-1);
-CharacterAddAbility(_Player,"FireSpecialist", 2);
-CharacterAddAbility(_Player,"AirSpecialist", 2);
-CharacterAddAbility(_Player,"EarthSpecialist", 2);
-CharacterAddAbility(_Player,"WaterSpecialist", 2);
-DB_TalentsUnlocked(_Player,"RainbowMage");
-
-IF
-CharacterUsedItemTemplate((CHARACTERGUID)_Player,"TALENTBOOK_Bully_75a95726-6dd9-4db6-be41-8848ddb641e5",_)
-AND
-CharacterGetTalentPoints(_Player,(INTEGER)_Int)
-AND
-_Int > 0
-AND
-NOT DB_TalentsUnlocked(_Player,"Bully")
-THEN
-CharacterAddTalentPoint(_Player,-1);
-CharacterAddTalent(_Player,"Bully");
-CharacterAddAttribute(_Player,"Strength",-3);
-CharacterAddAttribute(_Player,"Intelligence",-4);
-CharacterAddAttribute(_Player,"Finesse",-3);
-CharacterAddTalent(_Player,"MrKnowItAll");
-DB_TalentsUnlocked(_Player,"Bully");
-
 IF
 SkillCast(_Char,_FireSkill,_SkillType,"Fire")
 AND
@@ -413,7 +315,8 @@ CharacterKilledBy(_Char,_KillerOwner,_Killer)
 AND
 CharacterHasTalent(_Killer,"Executioner",1)
 THEN
-CharacterAddActionPoints(_Killer,1); 
+CharacterAddActionPoints(_Killer,1);
+
 EXITSECTION
 
 ENDEXITSECTION
