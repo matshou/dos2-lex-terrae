@@ -1,0 +1,16 @@
+new entry "_ComboFood"
+type "Potion"
+data "Duration" "6"
+data "UseAPCost" "1"
+data "IsConsumable" "Yes"
+data "IsFood" "Yes"
+
+new entry "_Food"
+type "Potion"
+data "Duration" "3"
+data "UseAPCost" "1"
+data "InventoryTab" "Consumable"
+data "UnknownBeforeConsume" "Yes"
+data "IsConsumable" "Yes"
+data "IsFood" "Yes"
+
