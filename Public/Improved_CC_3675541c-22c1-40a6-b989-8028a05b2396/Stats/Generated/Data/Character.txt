@@ -1,0 +1,18 @@
+new entry "CasualNPC"
+type "Character"
+data "ArmorBoost" "-50"
+data "MagicArmorBoost" "-50"
+data "Vitality" "-40"
+data "DamageBoost" "-50"
+data "Accuracy" "-15"
+
+new entry "NormalNPC"
+type "Character"
+
+new entry "HardcoreNPC"
+type "Character"
+data "ArmorBoost" "50"
+data "MagicArmorBoost" "50"
+data "Vitality" "50"
+data "DamageBoost" "50"
+data "Accuracy" "10"
