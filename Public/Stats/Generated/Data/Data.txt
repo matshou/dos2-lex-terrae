@@ -1,0 +1,20 @@
+key "VitalityStartingAmount","18"
+
+key "VitalityExponentialGrowth","1.28"
+key "VitalityLinearGrowth","12.5"
+
+key "FirstVitalityLeapGrowth","1.25"
+key "SecondVitalityLeapGrowth","1.5"
+key "ThirdVitalityLeapGrowth","1.25"
+key "FourthVitalityLeapGrowth","1.5"
+
+key "VitalityToDamageRatio","5"
+key "ExpectedDamageBoostFromSkillAbilityPerLevel","0.015"
+key "ExpectedDamageBoostFromWeaponAbilityPerLevel","0.025"
+key "ArmorToVitalityRatio","0.55"
+
+key "PriceGrowth","1.12"
+key "FirstPriceLeapGrowth","1.75"
+key "SecondPriceLeapGrowth","1.15"
+key "ThirdPriceLeapGrowth","1.5"
+key "FourthPriceLeapGrowth","1.15"
