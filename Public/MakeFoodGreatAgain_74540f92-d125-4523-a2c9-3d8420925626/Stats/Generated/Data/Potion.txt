@@ -10,7 +10,6 @@ type "Potion"
 data "Duration" "50"
 data "UseAPCost" "1"
 data "InventoryTab" "Consumable"
-data "UnknownBeforeConsume" "Yes"
 data "IsConsumable" "Yes"
+data "UnknownBeforeConsume" "No"
 data "IsFood" "Yes"
-
