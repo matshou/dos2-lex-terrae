@@ -1,12 +1,12 @@
 key "VitalityStartingAmount","100"
 
-key "VitalityExponentialGrowth","1.28"
-key "VitalityLinearGrowth","12.5"
+key "VitalityExponentialGrowth","1.04"
+key "VitalityLinearGrowth","4"
 
-key "FirstVitalityLeapGrowth","1.25"
-key "SecondVitalityLeapGrowth","1.5"
-key "ThirdVitalityLeapGrowth","1.25"
-key "FourthVitalityLeapGrowth","1.5"
+key "FirstVitalityLeapGrowth","1"
+key "SecondVitalityLeapGrowth","1"
+key "ThirdVitalityLeapGrowth","1"
+key "FourthVitalityLeapGrowth","1"
 
 key "VitalityToDamageRatio","5"
 key "ExpectedDamageBoostFromSkillAbilityPerLevel","0.015"
