@@ -10,8 +10,8 @@ key "FourthVitalityLeapGrowth","1"
 
 key "VitalityToDamageRatio","5"
 key "ExpectedDamageBoostFromSkillAbilityPerLevel","0.015"
-key "ExpectedDamageBoostFromWeaponAbilityPerLevel","0.025"
 key "ArmorToVitalityRatio","0.55"
+key "ExpectedDamageBoostFromWeaponAbilityPerLevel","-0.02"
 
 key "PriceGrowth","1.12"
 key "FirstPriceLeapGrowth","1.75"
