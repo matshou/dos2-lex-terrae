@@ -27,12 +27,12 @@
                     <attribute id="Author" value="yooks" type="30" />
                     <attribute id="CharacterCreationLevelName" value="" type="22" />
                     <attribute id="Description" value="Reduces vitality and price bloating while eliminating scaling leaps.  Vitality growth has been changed to DnD standard of 4 + 4% of max vitality per level." type="30" />
-                    <attribute id="Folder" value="ReducedNumberBloat_ARC_1309ac65-be7c-4b4b-9dab-e2b7eb6f5217" type="30" />
+                    <attribute id="Folder" value="ReducedNumberBloat_LT_1309ac65-be7c-4b4b-9dab-e2b7eb6f5217" type="30" />
                     <attribute id="GMTemplate" value="" type="22" />
                     <attribute id="LobbyLevelName" value="" type="22" />
                     <attribute id="MD5" value="" type="23" />
                     <attribute id="MenuLevelName" value="" type="22" />
-                    <attribute id="Name" value="Reduced Number Bloat (DE)" type="22" />
+                    <attribute id="Name" value="Reduced Number Bloat (Lex Terrae)" type="22" />
                     <attribute id="NumPlayers" value="2" type="1" />
                     <attribute id="PhotoBooth" value="" type="22" />
                     <attribute id="StartupLevelName" value="" type="22" />
