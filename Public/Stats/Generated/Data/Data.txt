@@ -1,4 +1,4 @@
-key "VitalityStartingAmount","18"
+key "VitalityStartingAmount","100"
 
 key "VitalityExponentialGrowth","1.28"
 key "VitalityLinearGrowth","12.5"
