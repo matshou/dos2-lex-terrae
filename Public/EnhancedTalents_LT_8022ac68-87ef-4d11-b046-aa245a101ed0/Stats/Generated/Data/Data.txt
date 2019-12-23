@@ -1,0 +1,8 @@
+key "TalentMemoryBonus","3"
+key "TalentSneakingDamageBonus","40"
+key "TalentWhatARushThreshold","50"
+key "UnstableDamagePercentage","50"
+key "LivingArmorHealPercentage","35"
+key "TalentCombatAbilityPointsBonus","1"
+key "TalentCivilAbilityPointsBonus","1"
+key "TalentExecutionerActionPointBonus","2"
