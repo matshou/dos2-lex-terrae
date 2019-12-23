@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1508109637" />
+    <version major="3" minor="6" revision="1" build="0" />
+    <region id="Config">
+        <node id="root">
+            <children>
+                <node id="Dependencies" />
+                <node id="ModuleInfo">
+                    <attribute id="Author" value="yooks" type="30" />
+                    <attribute id="CharacterCreationLevelName" value="" type="22" />
+                    <attribute id="Description" value="Make food effects last for 50 turns after consumed and make them visible before being consumed. This will make food actually useful in combat." type="30" />
+                    <attribute id="Folder" value="MakeFoodGreatAgain_74540f92-d125-4523-a2c9-3d8420925626" type="30" />
+                    <attribute id="GMTemplate" value="" type="22" />
+                    <attribute id="LobbyLevelName" value="" type="22" />
+                    <attribute id="MD5" value="" type="23" />
+                    <attribute id="MenuLevelName" value="" type="22" />
+                    <attribute id="Name" value="Make Food Great Again!" type="22" />
+                    <attribute id="NumPlayers" value="4" type="1" />
+                    <attribute id="PhotoBooth" value="" type="22" />
+                    <attribute id="StartupLevelName" value="" type="22" />
+                    <attribute id="Tags" value="" type="30" />
+                    <attribute id="Type" value="Add-on" type="22" />
+                    <attribute id="UUID" value="74540f92-d125-4523-a2c9-3d8420925626" type="22" />
+                    <attribute id="Version" value="268435456" type="4" />
+                    <children>
+						<node id="PublishVersion">
+							<attribute id="Version" value="907936416" type="4" />
+						</node>
+                        <node id="Scripts" />
+                        <node id="TargetModes">
+                            <children>
+                                <node id="Target">
+                                    <attribute id="Object" value="Story" type="22" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>
