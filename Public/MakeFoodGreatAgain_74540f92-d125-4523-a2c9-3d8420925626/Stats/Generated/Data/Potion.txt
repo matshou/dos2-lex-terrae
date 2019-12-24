@@ -3,6 +3,7 @@ type "Potion"
 data "Duration" "50"
 data "UseAPCost" "2"
 data "IsConsumable" "Yes"
+data "UnknownBeforeConsume" "No"
 data "IsFood" "Yes"
 
 new entry "_Food"
