@@ -1,7 +1,7 @@
 new entry "_ComboFood"
 type "Potion"
 data "Duration" "50"
-data "UseAPCost" "1"
+data "UseAPCost" "2"
 data "IsConsumable" "Yes"
 data "IsFood" "Yes"
 
