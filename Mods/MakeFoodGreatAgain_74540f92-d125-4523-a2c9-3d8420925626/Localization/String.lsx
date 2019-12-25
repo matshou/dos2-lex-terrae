@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="3" minor="1" revision="3" build="5" />
+	<region id="TranslatedStringKeys">
+		<node id="root">
+			<children>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="I have eaten enough..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_Full_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="I have drunk enough..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_Squench_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="I would like to eat something..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_Hunger_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="I will not be killed by an enemy but by hunger and exhaustion!" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_Sat_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="It's time to relax..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_toRest_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="Not enough time to fully recover..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_notRest_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="Let's go! With an open mind..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_fullRest_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
+					<attribute id="Content" value="It would be nice to recover my strengths..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_RestOut_Str" type="22" />
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

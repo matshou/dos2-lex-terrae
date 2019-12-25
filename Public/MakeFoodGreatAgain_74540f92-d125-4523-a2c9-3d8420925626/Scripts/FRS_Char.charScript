@@ -1,0 +1,345 @@
+INIT
+CHARACTER:__Me
+FIXEDSTRING: %FRS_Full=FRS_Full_Str	
+FIXEDSTRING: %FRS_Squench=FRS_Squench_Str
+FIXEDSTRING: %FRS_Hunger=FRS_Hunger_Str
+FIXEDSTRING: %FRS_starv=FRS_Sat_Str
+FIXEDSTRING: %FRS_fullRest=FRS_fullRest_Str
+FIXEDSTRING: %FRS_notRest=FRS_notRest_Str
+FIXEDSTRING: %FRS_toRest=FRS_toRest_Str
+FIXEDSTRING: %FRS_RestOut=FRS_RestOut_Str
+EXTERN FLOAT: %FRSHealthIn=1.0
+EVENTS
+//Initalisation
+EVENT Set_FRS
+ON
+OnInit()
+OnStoryOverride()
+ACTIONS
+IF "c1&c2&!c3"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+THEN
+	IF "(c1|c2)&!c3"
+		CharacterHasStatus(__Me,LYING)
+		CharacterHasStatus(__Me,SITTING)
+		CharacterHasStatus(__Me,FRSMed)
+	THEN
+		StartTimer("Rest0_xTime",30,0)
+	ENDIF
+	IF "!c1&!c2&!c3&!c4&!c5"
+		IsTagged(__Me, "UNDEAD")
+		CharacterHasStatus(__Me,FRSFull)
+		CharacterHasStatus(__Me,FRSquenched)
+		CharacterHasStatus(__Me,FRSstarvation)
+		CharacterHasStatus(__Me,FRSHunger)
+	THEN
+		CharacterApplyStatus(__Me,FRSHunger,200,1)
+	ENDIF
+ENDIF
+
+
+//Eat and Drink
+EVENT FRSFull_1
+VARS
+ITEM:_Item
+//INT: _TurnOut
+INT: _FullDuration
+ON
+OnUseItem(__Me,_Item)	
+ACTIONS
+IF "c1&c2&!c3"
+CharacterIsPlayer(__Me)
+CharacterIsInParty(__Me)
+CharacterIsDead(__Me)
+THEN
+//USE FOOD
+IF "(c1|c2)&(!c3&!c4&!c5)"
+	IsTagged(_Item, "FOOD")
+	IsTagged(_Item, "INGREDIENT")
+	IsTagged(_Item, "POISONED")
+	IsTagged(_Item, "VOIDTAINTED")
+	IsTagged(__Me, "UNDEAD")	
+THEN
+	IF "c1&!c2&c3"
+		IsTagged(_Item,"VEGETABLE")
+		IsTagged(_Item,"Mixed")
+		IsTagged(_Item, "FOOD")
+	THEN
+		Set(_FullDuration,500)
+	ELIF "(c1|c2)&(!c3&c4)"
+		IsTagged(_Item,"MEAT")
+		IsTagged(_Item,"FISH")
+		IsTagged(_Item,"Mixed")
+		IsTagged(_Item, "FOOD")
+	THEN
+		Set(_FullDuration,650)
+	ELIF "(!c1&c2)|c3"
+		IsTagged(_Item, "FOOD")
+		IsTagged(_Item, "INGREDIENT")
+		IsTagged(_Item, "Herb")
+	THEN
+		Set(_FullDuration,400)
+	ELIF "c1&c2&!c3&!c4&!c5&!c6"
+		IsTagged(_Item, "FOOD")
+		IsTagged(_Item, "INGREDIENT")
+		IsTagged(_Item,"MEAT")
+		IsTagged(_Item,"FISH")
+		IsTagged(_Item,"Mixed")
+		IsTagged(_Item,"VEGETABLE")
+	THEN
+		Set(_FullDuration,450)
+	ELSE
+		Set(_FullDuration,800)
+	ENDIF
+	IF "!c1"
+		IsInCombat(__Me)
+	THEN
+		DisplayText(__Me,%FRS_Full,4)
+	ENDIF
+	CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
+	CharacterRemoveStatus(__Me,FRSHunger)
+	CharacterRemoveStatus(__Me,FRSstarvation)
+
+//USE DRINK
+ELIF "c1&!c2&!c3&!c4&!c5"
+	IsTagged(_Item, "DRINK")
+	IsTagged(_Item, "POISONED")
+	IsTagged(_Item, "Potion")
+	IsTagged(_Item, "ALCOHOL")
+	IsTagged(__Me, "UNDEAD")	
+THEN
+	IF "!c1"
+		IsInCombat(__Me)
+	THEN
+		DisplayText(__Me,%FRS_Squench,4)
+	ENDIF
+	CharacterApplyStatus(__Me,FRSquenched,600,1)
+	CharacterRemoveStatus(__Me,FRSHunger)
+	CharacterRemoveStatus(__Me,FRSstarvation)
+ENDIF
+ENDIF
+
+// Apply Hunger
+EVENT FRSHunger_1
+ON
+OnCharacterStatusRemoved(__Me,FRSFull)
+OnCharacterStatusRemoved(__Me,FRSquenched)
+ACTIONS
+IF "!c1&!c2&c3&c4"
+	CharacterHasStatus(__Me,FRSFull)
+	CharacterHasStatus(__Me,FRSquenched)
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+THEN
+	CharacterApplyStatus(__Me,FRSHunger,200,1)
+	DisplayText(__Me,%FRS_Hunger,4)
+ENDIF
+
+// Apply Starvation
+EVENT FRSHunger_2
+ON
+OnCharacterStatusRemoved(__Me,FRSHunger)
+ACTIONS
+IF "!c1&!c2&c3&c4&!c5"
+	CharacterHasStatus(__Me,FRSFull)
+	CharacterHasStatus(__Me,FRSquenched)
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+THEN
+	CharacterApplyStatus(__Me,FRSstarvation,-1,1)
+	DisplayText(__Me,%FRS_starv,4)
+ENDIF
+
+//Rest-System
+//Use furniture
+EVENT toRelax_1
+ON
+OnCharacterStatusApplied(__Me,SITTING)
+OnCharacterStatusApplied(__Me,LYING)
+ACTIONS
+IF "c1&c2&!c3&!c4"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	IsInCombat(__Me)
+THEN
+	DisplayText(__Me,%FRS_toRest,5)
+	StartTimer("Rest0_xTime",50,0)
+	CharacterGetStat(%FRSHealthIn,__Me,Vitality)
+ENDIF
+
+//Rest Stop
+EVENT FRSRelax_Stop
+ON
+OnCharacterStatusRemoved(__Me,LYING)
+OnCharacterStatusRemoved(__Me,SITTING)
+ACTIONS
+IF "c1&c2&!c3&!c4"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterHasStatus(__Me,FRSMed)
+THEN
+	DisplayText(__Me,%FRS_notRest,5)
+	StopTimer("Rest0_xTime")
+ELIF "!c1&c2"
+	CharacterIsDead(__Me)
+	CharacterHasStatus(__Me,FRSMed)
+THEN
+	DisplayText(__Me,%FRS_fullRest,10)
+	CharacterApplyStatus(__Me,FRSRest,900,1)
+	CharacterRemoveStatus(__Me,FRSMed)
+	StopTimer("Rest0_xTime")
+ENDIF
+
+//Meditation
+EVENT FRSMeditation_01
+ON
+OnTimer("Rest0_xTime")
+ACTIONS
+IF "c1&c2&!c3&!c4&(c5|c6)"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterIsSummon(__Me)
+	CharacterHasStatus(__Me,LYING)
+	CharacterHasStatus(__Me,SITTING)
+THEN
+	CharacterApplyStatus(__Me,FRSMed,-1,1)
+	CharacterAddSourcePoints(__Me,3)
+	IF "!c1"
+	IsTagged(__Me, "UNDEAD")
+	THEN
+	CharacterHeal(__Me,100)
+	ENDIF
+	IF "c1"
+		CharacterHasSkill(__Me, Shout_SpiritVision)
+	THEN
+		CharacterApplyStatus(__Me,SPIRIT_VISION,-1,1)
+	ENDIF
+ENDIF
+
+//Spirit-Vision on-off
+EVENT FRSSpiritVision_but
+ON
+OnCharacterStatusAttempt(__Me,SPIRIT_VISION)
+ACTIONS
+IF "c1&c2&!c3&!c4&(c5|c6)&!c7"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterIsSummon(__Me)
+	CharacterHasStatus(__Me,FRSMed)
+	CharacterHasStatus(__Me,FRSRest)
+	CharacterHasStatus(__Me,SPIRIT_VISION)
+THEN
+	StartTimer("SV_InXTime",1,0)
+ENDIF
+
+EVENT FRSSpiritVision_off
+ON
+OnSkillCast(__Me,Shout_SpiritVision)
+ACTIONS
+IF "c1&c2&!c3&!c4&с5(c6|c7)&c8"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterIsSummon(__Me)
+	CharacterHasSkill(__Me,Shout_SpiritVision)
+	CharacterHasStatus(__Me,FRSMed)
+	CharacterHasStatus(__Me,FRSRest)
+	CharacterHasStatus(__Me,SPIRIT_VISION)
+THEN
+	CharacterRemoveStatus(__Me,SPIRIT_VISION) 
+ENDIF
+
+EVENT FRSSpiritVision_OnR
+ON
+OnTimer("SV_InXTime")
+ACTIONS
+IF "c1&c2&!c3&!c4&(c5|c6)"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterIsSummon(__Me)
+	CharacterHasStatus(__Me,FRSMed)
+	CharacterHasStatus(__Me,FRSRest)
+THEN
+	CharacterApplyStatus(__Me,SPIRIT_VISION,-1,1)
+ENDIF
+
+EVENT Spirit_Vision_CansRest
+ON
+OnCharacterStatusRemoved(__Me,FRSRest)
+ACTIONS
+IF "c1&!c2"
+	CharacterHasSkill(__Me,Shout_SpiritVision)
+	CharacterHasStatus(__Me,FRSRest)
+THEN
+	CharacterRemoveStatus(__Me,SPIRIT_VISION)
+ELIF "!c1"
+	CharacterHasStatus(__Me,FRSRest)
+THEN
+	DisplayText(__Me,%FRS_RestOut,4)
+ENDIF
+
+EVENT Spirit_Vision_CansMed
+ON
+OnCharacterStatusRemoved(__Me,FRSMed)
+ACTIONS
+IF "c1&(c2|c3)"
+	CharacterHasSkill(__Me,Shout_SpiritVision)
+	CharacterHasStatus(__Me,LYING)
+	CharacterHasStatus(__Me,SITTING)
+THEN
+	CharacterRemoveStatus(__Me,SPIRIT_VISION)
+ENDIF
+
+EVENT FRSDamage_Rest_Out
+VARS
+FLOAT:_FRSHealth
+ON
+OnCharacterVitalityChanged(__Me,_)
+OnTurn(__Me)
+ACTIONS
+IF "c1&c2&!c3&!c4&!c5&c6"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterIsSummon(__Me)
+	IsTagged(__Me, "UNDEAD")
+	CharacterGetStat(_FRSHealth,__Me,Vitality)
+THEN
+	IF "(c1|c2|c3)&c4"
+		CharacterHasStatus(__Me,FRSMed)
+		CharacterHasStatus(__Me,LYING)
+		CharacterHasStatus(__Me,SITTING)
+		IsLessThen(_FRSHealth,%FRSHealthIn)
+	THEN		
+		CharacterRemoveStatus(__Me,FRSMed)
+		StopTimer("Rest0_xTime")
+	ENDIF
+	IF "c1&c2"
+		CharacterHasStatus(__Me,FRSRest)
+		IsLessThen(_FRSHealth,0.5)
+	THEN
+		CharacterRemoveStatus(__Me,FRSRest)
+	ENDIF
+ENDIF
+
+EVENT FRSFrom_dying_1
+ON
+OnCharacterStatusRemoved(__Me,DYING)
+ACTIONS
+IF "c1&c2&!c3&!c4"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsSummon(__Me)
+	IsTagged(__Me, "UNDEAD")
+THEN
+	CharacterApplyStatus(__Me,FRSHunger,200,1)
+	DisplayText(__Me,%FRS_Hunger,4)
+ENDIF
