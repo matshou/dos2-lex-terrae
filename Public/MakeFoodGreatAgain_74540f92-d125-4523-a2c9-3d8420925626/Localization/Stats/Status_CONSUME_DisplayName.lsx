@@ -6,42 +6,42 @@
 		<node id="root">
 			<children>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="|Sated|" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Well fed" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
 					<attribute id="UUID" value="FRSFull_DisplayName" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="|Thirst quenched|" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Hydrated" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
 					<attribute id="UUID" value="FRSquenched_DisplayName" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="|Empty stomach|" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Hungry" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
 					<attribute id="UUID" value="FRSHunger_DisplayName" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="|Complete starvation|" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Starving" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
 					<attribute id="UUID" value="FRSstarvation_DisplayName" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="|Relaxed|" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Relaxing" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
 					<attribute id="UUID" value="FRSMed_DisplayName" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="|Perfectly rested|" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Well rested" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
