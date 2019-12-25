@@ -27,7 +27,7 @@
 					<attribute id="UUID" value="Stats_FRSHunger" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="Complete starvation" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Starvation" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
@@ -41,7 +41,7 @@
 					<attribute id="UUID" value="Stats_FRSMed" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="Perfectly rested" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Well rested" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
