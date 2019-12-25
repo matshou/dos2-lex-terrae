@@ -102,8 +102,6 @@ ELIF "c1&!c2&!c3&!c4&!c5"
 	IsTagged(__Me, "UNDEAD")	
 THEN
 	CharacterApplyStatus(__Me,FRSquenched,600,1)
-	CharacterRemoveStatus(__Me,FRSHunger)
-	CharacterRemoveStatus(__Me,FRSstarvation)
 ENDIF
 ENDIF
 
@@ -115,7 +113,6 @@ OnCharacterStatusRemoved(__Me,FRSquenched)
 ACTIONS
 IF "!c1&!c2&c3&c4"
 	CharacterHasStatus(__Me,FRSFull)
-	CharacterHasStatus(__Me,FRSquenched)
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 THEN
@@ -130,7 +127,6 @@ OnCharacterStatusRemoved(__Me,FRSHunger)
 ACTIONS
 IF "!c1&!c2&c3&c4&!c5"
 	CharacterHasStatus(__Me,FRSFull)
-	CharacterHasStatus(__Me,FRSquenched)
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
