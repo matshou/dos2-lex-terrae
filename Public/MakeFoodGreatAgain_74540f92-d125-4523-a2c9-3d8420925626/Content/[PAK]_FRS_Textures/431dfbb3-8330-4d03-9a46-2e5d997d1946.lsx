@@ -10,7 +10,7 @@
 					<attribute id="Localized" value="False" type="19" />
 					<attribute id="Streaming" value="True" type="19" />
 					<attribute id="Type" value="0" type="4" />
-					<attribute id="SourceFile" value="Public/Food_Rest_SysRe_bd7c45d0-df0f-4cb3-989e-1458506b34dd/Assets/Textures/FRS_Icons.dds" type="30" />
+					<attribute id="SourceFile" value="Public/MakeFoodGreatAgain_74540f92-d125-4523-a2c9-3d8420925626/Assets/Textures/FRS_Icons.dds" type="30" />
 					<attribute id="Template" value="FRS_Icons" type="22" />
 					<attribute id="Name" value="FRS_Icons" type="23" />
 					<attribute id="SRGB" value="True" type="19" />

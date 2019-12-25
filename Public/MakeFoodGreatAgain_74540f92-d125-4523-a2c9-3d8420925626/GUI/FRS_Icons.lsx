@@ -44,7 +44,7 @@
                     <attribute id="Width" value="64" type="4" />
                 </node>
                 <node id="TextureAtlasPath">
-                    <attribute id="Path" value="Public/Food_Rest_SysRe_bd7c45d0-df0f-4cb3-989e-1458506b34dd/Assets/Textures/FRS_Icons.dds" type="29" />
+                    <attribute id="Path" value="Public/MakeFoodGreatAgain_74540f92-d125-4523-a2c9-3d8420925626/Assets/Textures/FRS_Icons.dds" type="29" />
                     <attribute id="UUID" value="431dfbb3-8330-4d03-9a46-2e5d997d1946" type="22" />
                 </node>
                 <node id="TextureAtlasTextureSize">

@@ -9,7 +9,7 @@
 					<attribute id="ID" value="586e7144-8f5f-4a08-977a-f887a1695d1b" type="22" />
 					<attribute id="Localized" value="False" type="19" />
 					<attribute id="Name" value="FRS_Char" type="23" />
-					<attribute id="SourceFile" value="Public/Shared/Scripts/FRS_Char.charScript" type="30" />
+					<attribute id="SourceFile" value="Public/MakeFoodGreatAgain_74540f92-d125-4523-a2c9-3d8420925626/Scripts/FRS_Char.charScript" type="30" />
 					<children>
 						<node id="Parameters" />
 					</children>
