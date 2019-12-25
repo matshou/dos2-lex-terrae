@@ -1,11 +1,7 @@
 INIT
 CHARACTER:__Me
-FIXEDSTRING: %FRS_Full=FRS_Full_Str	
-FIXEDSTRING: %FRS_Squench=FRS_Squench_Str
 FIXEDSTRING: %FRS_Hunger=FRS_Hunger_Str
 FIXEDSTRING: %FRS_starv=FRS_Sat_Str
-FIXEDSTRING: %FRS_fullRest=FRS_fullRest_Str
-FIXEDSTRING: %FRS_notRest=FRS_notRest_Str
 FIXEDSTRING: %FRS_toRest=FRS_toRest_Str
 FIXEDSTRING: %FRS_RestOut=FRS_RestOut_Str
 EXTERN FLOAT: %FRSHealthIn=1.0
@@ -93,11 +89,6 @@ THEN
 	ELSE
 		Set(_FullDuration,800)
 	ENDIF
-	IF "!c1"
-		IsInCombat(__Me)
-	THEN
-		DisplayText(__Me,%FRS_Full,4)
-	ENDIF
 	CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
 	CharacterRemoveStatus(__Me,FRSHunger)
 	CharacterRemoveStatus(__Me,FRSstarvation)
@@ -110,11 +101,6 @@ ELIF "c1&!c2&!c3&!c4&!c5"
 	IsTagged(_Item, "ALCOHOL")
 	IsTagged(__Me, "UNDEAD")	
 THEN
-	IF "!c1"
-		IsInCombat(__Me)
-	THEN
-		DisplayText(__Me,%FRS_Squench,4)
-	ENDIF
 	CharacterApplyStatus(__Me,FRSquenched,600,1)
 	CharacterRemoveStatus(__Me,FRSHunger)
 	CharacterRemoveStatus(__Me,FRSstarvation)
@@ -183,13 +169,11 @@ IF "c1&c2&!c3&!c4"
 	CharacterIsDead(__Me)
 	CharacterHasStatus(__Me,FRSMed)
 THEN
-	DisplayText(__Me,%FRS_notRest,5)
 	StopTimer("Rest0_xTime")
 ELIF "!c1&c2"
 	CharacterIsDead(__Me)
 	CharacterHasStatus(__Me,FRSMed)
 THEN
-	DisplayText(__Me,%FRS_fullRest,10)
 	CharacterApplyStatus(__Me,FRSRest,900,1)
 	CharacterRemoveStatus(__Me,FRSMed)
 	StopTimer("Rest0_xTime")
