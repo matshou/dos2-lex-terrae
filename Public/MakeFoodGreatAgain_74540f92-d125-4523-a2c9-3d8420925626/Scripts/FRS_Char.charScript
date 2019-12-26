@@ -63,20 +63,20 @@ THEN
 		IsTagged(_Item,"Mixed")
 		IsTagged(_Item, "FOOD")
 	THEN
-		Set(_FullDuration,500)
+		Set(_FullDuration,215)
 	ELIF "(c1|c2)&(!c3&c4)"
 		IsTagged(_Item,"MEAT")
 		IsTagged(_Item,"FISH")
 		IsTagged(_Item,"Mixed")
 		IsTagged(_Item, "FOOD")
 	THEN
-		Set(_FullDuration,650)
+		Set(_FullDuration,275)
 	ELIF "(!c1&c2)|c3"
 		IsTagged(_Item, "FOOD")
 		IsTagged(_Item, "INGREDIENT")
 		IsTagged(_Item, "Herb")
 	THEN
-		Set(_FullDuration,400)
+		Set(_FullDuration,170)
 	ELIF "c1&c2&!c3&!c4&!c5&!c6"
 		IsTagged(_Item, "FOOD")
 		IsTagged(_Item, "INGREDIENT")
@@ -85,9 +85,9 @@ THEN
 		IsTagged(_Item,"Mixed")
 		IsTagged(_Item,"VEGETABLE")
 	THEN
-		Set(_FullDuration,450)
+		Set(_FullDuration,190)
 	ELSE
-		Set(_FullDuration,800)
+		Set(_FullDuration,340)
 	ENDIF
 	CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
 	CharacterRemoveStatus(__Me,FRSHunger)
@@ -101,7 +101,7 @@ ELIF "c1&!c2&!c3&!c4&!c5"
 	IsTagged(_Item, "ALCOHOL")
 	IsTagged(__Me, "UNDEAD")	
 THEN
-	CharacterApplyStatus(__Me,FRSquenched,600,1)
+	CharacterApplyStatus(__Me,FRSquenched,200,1)
 ENDIF
 ENDIF
 
