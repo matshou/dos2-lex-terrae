@@ -43,7 +43,7 @@ ITEM:_Item
 //INT: _TurnOut
 INT: _FullDuration
 ON
-OnUseItem(__Me,_Item)	
+OnUseItem(__Me,_Item)
 ACTIONS
 IF "c1&c2&!c3"
 CharacterIsPlayer(__Me)
@@ -233,7 +233,7 @@ IF "c1&c2&!c3&!c4&с5(c6|c7)&c8"
 	CharacterHasStatus(__Me,FRSRest)
 	CharacterHasStatus(__Me,SPIRIT_VISION)
 THEN
-	CharacterRemoveStatus(__Me,SPIRIT_VISION) 
+	CharacterRemoveStatus(__Me,SPIRIT_VISION)
 ENDIF
 
 EVENT FRSSpiritVision_OnR
@@ -298,7 +298,7 @@ THEN
 		CharacterHasStatus(__Me,LYING)
 		CharacterHasStatus(__Me,SITTING)
 		IsLessThen(_FRSHealth,%FRSHealthIn)
-	THEN		
+	THEN
 		CharacterRemoveStatus(__Me,FRSMed)
 		StopTimer("Rest0_xTime")
 	ENDIF
