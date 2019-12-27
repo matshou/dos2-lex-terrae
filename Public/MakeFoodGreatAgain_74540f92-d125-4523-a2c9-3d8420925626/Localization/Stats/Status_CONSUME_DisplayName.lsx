@@ -6,7 +6,7 @@
 		<node id="root">
 			<children>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="Well fed" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Fed" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />

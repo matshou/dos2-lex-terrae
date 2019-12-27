@@ -42,7 +42,7 @@ data "InitiateCombat" "No"
 data "DisplayName" "FRSstarvation_DisplayName"
 data "Description" "FRSstarvation_Description"
 data "Icon" "FRS_Starvation"
-data "FormatColor" "Yellow"
+data "FormatColor" "Red"
 data "StatsId" "Stats_FRSstarvation"
 data "StackId" "Stack_FRSstarvation"
 
@@ -69,4 +69,3 @@ data "Icon" "FRS_FoolRest"
 data "FormatColor" "Green"
 data "StatsId" "Stats_FRSRest"
 data "StackId" "Stack_FRSRest"
-

@@ -27,7 +27,7 @@
 					<attribute id="UUID" value="FRSHunger_Description" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="Character didn't eat any food for a long time." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Character is starving." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
@@ -41,7 +41,7 @@
 					<attribute id="UUID" value="FRSMed_Description" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
-					<attribute id="Content" value="Character feels rested and refreshed." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="Content" value="Character feels fully rested." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />
 					<attribute id="Stub" value="True" type="19" />
