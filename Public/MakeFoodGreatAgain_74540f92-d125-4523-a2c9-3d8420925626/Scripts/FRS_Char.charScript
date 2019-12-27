@@ -6,7 +6,11 @@ FIXEDSTRING: %FRS_toRest=FRS_toRest_Str
 FIXEDSTRING: %FRS_RestOut=FRS_RestOut_Str
 EXTERN FLOAT: %FRSHealthIn=1.0
 EVENTS
-//Initalisation
+
+/////////////////////
+// Initialization
+/////////////////////
+
 EVENT Set_FRS
 ON
 OnInit()
@@ -24,24 +28,39 @@ THEN
 	THEN
 		StartTimer("Rest0_xTime",30,0)
 	ENDIF
-	IF "!c1&!c2&!c3&!c4&!c5"
+	IF "!c1"
 		IsTagged(__Me, "UNDEAD")
-		CharacterHasStatus(__Me,FRSFull)
-		CharacterHasStatus(__Me,FRSquenched)
-		CharacterHasStatus(__Me,FRSstarvation)
-		CharacterHasStatus(__Me,FRSHunger)
 	THEN
-		CharacterApplyStatus(__Me,FRSHunger,200,1)
+		IF "!c1&!c2&!c3&!c4"
+			CharacterHasStatus(__Me,FRSFull)
+			CharacterHasStatus(__Me,FRSNoHunger)
+			CharacterHasStatus(__Me,FRSHunger)
+			CharacterHasStatus(__Me,FRSstarvation)
+		THEN
+			CharacterApplyStatus(__Me,FRSNoHunger,200,1)
+		ELIF "!c1&!c2"
+			CharacterHasStatus(__Me,FRSquenched)
+			CharacterHasStatus(__Me,FRSNoThirst)
+			CharacterHasStatus(__Me,FRSDehydrated)
+		THEN
+			CharacterApplyStatus(__Me,FRSNoThirst,125,1)
+		ENDIF
 	ENDIF
 ENDIF
 
+///////////////////////////
+// Apply POSITIVE status
+///////////////////////////
 
-//Eat and Drink
 EVENT FRSFull_1
 VARS
+STRING: _DebugText
 ITEM:_Item
 //INT: _TurnOut
 INT: _FullDuration
+INT: _MaxDuration
+INT: _MinDuration
+INT: _StatusTurns
 ON
 OnUseItem(__Me,_Item)
 ACTIONS
@@ -50,71 +69,153 @@ CharacterIsPlayer(__Me)
 CharacterIsInParty(__Me)
 CharacterIsDead(__Me)
 THEN
-//USE FOOD
-IF "(c1|c2)&(!c3&!c4&!c5)"
-	IsTagged(_Item, "FOOD")
-	IsTagged(_Item, "INGREDIENT")
-	IsTagged(_Item, "POISONED")
-	IsTagged(_Item, "VOIDTAINTED")
-	IsTagged(__Me, "UNDEAD")	
-THEN
-	IF "c1&!c2&c3"
-		IsTagged(_Item,"VEGETABLE")
-		IsTagged(_Item,"Mixed")
-		IsTagged(_Item, "FOOD")
-	THEN
-		Set(_FullDuration,215)
-	ELIF "(c1|c2)&(!c3&c4)"
-		IsTagged(_Item,"MEAT")
-		IsTagged(_Item,"FISH")
-		IsTagged(_Item,"Mixed")
-		IsTagged(_Item, "FOOD")
-	THEN
-		Set(_FullDuration,275)
-	ELIF "(!c1&c2)|c3"
+	////////////////
+	// Using Food
+	////////////////
+	IF "(c1|c2)&(!c3&!c4&!c5)"
 		IsTagged(_Item, "FOOD")
 		IsTagged(_Item, "INGREDIENT")
-		IsTagged(_Item, "Herb")
+		IsTagged(_Item, "POISONED")
+		IsTagged(_Item, "VOIDTAINTED")
+		IsTagged(__Me, "UNDEAD")
 	THEN
-		Set(_FullDuration,170)
-	ELIF "c1&c2&!c3&!c4&!c5&!c6"
-		IsTagged(_Item, "FOOD")
-		IsTagged(_Item, "INGREDIENT")
-		IsTagged(_Item,"MEAT")
-		IsTagged(_Item,"FISH")
-		IsTagged(_Item,"Mixed")
-		IsTagged(_Item,"VEGETABLE")
+		////////////////
+		// Vegetables
+		////////////////
+		IF "c1&!c2&c3"
+			IsTagged(_Item,"VEGETABLE")
+			IsTagged(_Item,"Mixed")
+			IsTagged(_Item, "FOOD")
+		THEN
+			Set(_MaxDuration,188)
+			Set(_MinDuration,113)
+		////////////////
+		// Meat & Fish
+		////////////////
+		ELIF "(c1|c2)&(!c3&c4)"
+			IsTagged(_Item,"MEAT")
+			IsTagged(_Item,"FISH")
+			IsTagged(_Item,"Mixed")
+			IsTagged(_Item, "FOOD")
+		THEN
+			Set(_MaxDuration,231)
+			Set(_MinDuration,138)
+		///////////////////////////////////
+		// Non-Food Ingredients & Herbs
+		//////////////////////////////////
+		ELIF "(!c1&c2)|c3"
+			IsTagged(_Item, "FOOD")
+			IsTagged(_Item, "INGREDIENT")
+			IsTagged(_Item, "Herb")
+		THEN
+			Set(_MaxDuration,144)
+			Set(_MinDuration,86)
+		//////////////////////
+		// Food Ingredients
+		//////////////////////
+		ELIF "c1&c2&!c3&!c4&!c5&!c6"
+			IsTagged(_Item, "FOOD")
+			IsTagged(_Item, "INGREDIENT")
+			IsTagged(_Item,"MEAT")
+			IsTagged(_Item,"FISH")
+			IsTagged(_Item,"Mixed")
+			IsTagged(_Item,"VEGETABLE")
+		THEN
+			Set(_MaxDuration,163)
+			Set(_MinDuration,98)
+		////////////////
+		// Combo Food
+		////////////////
+		ELSE
+			Set(_MaxDuration,325)
+			Set(_MinDuration,195)
+		ENDIF
+		// Calculation a random duration value
+		GetRandomBetween(_FullDuration,_MinDuration,_MaxDuration)
+		IF "c1"
+			GetStatusTurns(__Me,FRSFull2,_StatusTurns)
+		THEN
+			Add(_FullDuration,_StatusTurns)
+			Clamp(_FullDuration,0,150)
+			CharacterApplyStatus(__Me,FRSFull2,_FullDuration,1)
+		ELSE
+			IF "c1"
+				GetStatusTurns(__Me,FRSFull,_StatusTurns)
+			THEN
+				Add(_FullDuration,_StatusTurns)
+			ENDIF
+			IF "c1"
+				IsGreaterThen(_FullDuration,250)
+			THEN
+				Subtract(_FullDuration,250)
+				CharacterApplyStatus(__Me,FRSFull2,_FullDuration,1)
+				CharacterRemoveStatus(__Me,FRSFull)
+			ELSE
+				CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
+			ENDIF
+		ENDIF
+		// Remove negative effects
+		CharacterRemoveStatus(__Me,FRSHunger)
+		CharacterRemoveStatus(__Me,FRSstarvation)
+	////////////////
+	// Using Drink
+	////////////////
+	ELIF "c1&!c2&!c3&!c4&!c5"
+		IsTagged(_Item, "DRINK")
+		IsTagged(_Item, "POISONED")
+		IsTagged(_Item, "Potion")
+		IsTagged(_Item, "ALCOHOL")
+		IsTagged(__Me, "UNDEAD")
 	THEN
-		Set(_FullDuration,190)
-	ELSE
-		Set(_FullDuration,340)
+		CharacterApplyStatus(__Me,FRSquenched,75,1)
+		CharacterRemoveStatus(__Me,FRSDehydrated)
 	ENDIF
-	CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
-	CharacterRemoveStatus(__Me,FRSHunger)
-	CharacterRemoveStatus(__Me,FRSstarvation)
+ENDIF
 
-//USE DRINK
-ELIF "c1&!c2&!c3&!c4&!c5"
-	IsTagged(_Item, "DRINK")
-	IsTagged(_Item, "POISONED")
-	IsTagged(_Item, "Potion")
-	IsTagged(_Item, "ALCOHOL")
-	IsTagged(__Me, "UNDEAD")	
+//////////////////////////
+// Apply NEUTRAL status
+//////////////////////////
+
+// Apply "no thirst"
+EVENT FRSNoThirst_1
+ON
+OnCharacterStatusRemoved(__Me,FRSquenched)
+ACTIONS
+IF "c1&c2&!c3"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
 THEN
-	CharacterApplyStatus(__Me,FRSquenched,200,1)
+	CharacterApplyStatus(__Me,FRSNoThirst,125,1)
 ENDIF
+
+// Apply "no hunger"
+EVENT FRSNoHunger_1
+ON
+OnCharacterStatusRemoved(__Me,FRSFull)
+ACTIONS
+IF "c1&c2&!c3"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+THEN
+	CharacterApplyStatus(__Me,FRSNoHunger,200,1)
 ENDIF
+
+//////////////////////////
+// Apply NEGATIVE status
+//////////////////////////
 
 // Apply Hunger
 EVENT FRSHunger_1
 ON
-OnCharacterStatusRemoved(__Me,FRSFull)
-OnCharacterStatusRemoved(__Me,FRSquenched)
+OnCharacterStatusRemoved(__Me,FRSNoHunger)
 ACTIONS
-IF "!c1&!c2&c3&c4"
-	CharacterHasStatus(__Me,FRSFull)
+IF "c1&c2&!c3&!c4"
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterHasStatus(__Me,FRSFull)
 THEN
 	CharacterApplyStatus(__Me,FRSHunger,200,1)
 	DisplayText(__Me,%FRS_Hunger,4)
@@ -125,17 +226,34 @@ EVENT FRSHunger_2
 ON
 OnCharacterStatusRemoved(__Me,FRSHunger)
 ACTIONS
-IF "!c1&!c2&c3&c4&!c5"
-	CharacterHasStatus(__Me,FRSFull)
+IF "c1&c2&!c3&!c4"
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
+	CharacterHasStatus(__Me,FRSFull)
 THEN
 	CharacterApplyStatus(__Me,FRSstarvation,-1,1)
 	DisplayText(__Me,%FRS_starv,4)
 ENDIF
 
-//Rest-System
+EVENT FRS_Thirst_1
+ON
+OnCharacterStatusRemoved(__Me,FRSNoThirst)
+ACTIONS
+IF "c1&c2&!c3&!c4"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterHasStatus(__Me,FRSquenched)
+THEN
+	CharacterApplyStatus(__Me,FRSDehydrated,-1,1)
+	//DisplayText(__Me,%FRS_Hunger,4)
+ENDIF
+
+//////////////////
+// Rest System
+//////////////////
+
 //Use furniture
 EVENT toRelax_1
 ON
@@ -320,6 +438,6 @@ IF "c1&c2&!c3&!c4"
 	CharacterIsSummon(__Me)
 	IsTagged(__Me, "UNDEAD")
 THEN
-	CharacterApplyStatus(__Me,FRSHunger,200,1)
-	DisplayText(__Me,%FRS_Hunger,4)
+	CharacterApplyStatus(__Me,FRSNoHunger,200,1)
+	CharacterApplyStatus(__Me,FRSNoThirst,125,1)
 ENDIF
