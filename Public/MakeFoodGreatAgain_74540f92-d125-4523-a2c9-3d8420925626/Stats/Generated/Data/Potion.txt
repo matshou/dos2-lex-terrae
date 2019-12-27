@@ -1571,6 +1571,12 @@ data "Wits" "-2"
 data "APRecovery" "-1"
 data "StatusIcon" "FRS_hunger"
 
+new entry "Stats_FRSNoHunger"
+type "Potion"
+
+new entry "Stats_FRSNoThirst"
+type "Potion"
+
 new entry "Stats_FRSstarvation"
 type "Potion"
 data "Strength" "-5"
