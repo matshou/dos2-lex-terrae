@@ -1575,6 +1575,11 @@ data "FireResistance" "4"
 data "MovementSpeedBoost" "6"
 data "StatusIcon" "Item_CON_Drink_Mug_A_Blue"
 
+new entry "Stats_FRSDehydrated"
+type "Potion"
+data "FireResistance" "-10"
+data "MovementSpeedBoost" "-15"
+data "APRecovery" "-1"
 data "StatusIcon" "Item_CON_Drink_Mug_A_Blue"
 
 new entry "Stats_FRSHunger"
