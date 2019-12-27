@@ -154,9 +154,10 @@ THEN
 				CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
 			ENDIF
 		ENDIF
-		// Remove negative effects
+		// Remove neutral and negative effects
 		CharacterRemoveStatus(__Me,FRSHunger)
 		CharacterRemoveStatus(__Me,FRSstarvation)
+		CharacterRemoveStatus(__Me,FRSNoHunger)
 	////////////////
 	// Using Drink
 	////////////////
@@ -169,6 +170,7 @@ THEN
 	THEN
 		CharacterApplyStatus(__Me,FRSquenched,75,1)
 		CharacterRemoveStatus(__Me,FRSDehydrated)
+		CharacterRemoveStatus(__Me,FRSNoThirst)
 	ENDIF
 ENDIF
 
@@ -200,6 +202,22 @@ IF "c1&c2&!c3"
 	CharacterIsDead(__Me)
 THEN
 	CharacterApplyStatus(__Me,FRSNoHunger,200,1)
+ENDIF
+
+//////////////////////////
+// Apply REGULAR hunger
+//////////////////////////
+
+EVENT FRSHunger_0
+ON
+OnCharacterStatusRemoved(__Me,FRSFull2)
+ACTIONS
+IF "c1&c2&!c3"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+THEN
+	CharacterApplyStatus(__Me,FRSFull,250,1)
 ENDIF
 
 //////////////////////////
