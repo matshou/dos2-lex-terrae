@@ -5,6 +5,7 @@ FIXEDSTRING: %FRS_starv=FRS_Sat_Str
 FIXEDSTRING: %FRS_toRest=FRS_toRest_Str
 FIXEDSTRING: %FRS_RestOut=FRS_RestOut_Str
 FIXEDSTRING: %FRS_thirst=FRS_Thirst_Str
+FIXEDSTRING: %FRS_dehydrat=FRS_Dehydrated_Str
 EXTERN FLOAT: %FRSHealthIn=1.0
 EVENTS
 
@@ -282,7 +283,7 @@ IF "c1&c2&!c3&!c4"
 	CharacterHasStatus(__Me,FRSquenched)
 THEN
 	CharacterApplyStatus(__Me,FRSDehydrated,-1,1)
-	//DisplayText(__Me,%FRS_Hunger,4)
+	DisplayText(__Me,%FRS_dehydrat,5)
 ENDIF
 
 //////////////////
