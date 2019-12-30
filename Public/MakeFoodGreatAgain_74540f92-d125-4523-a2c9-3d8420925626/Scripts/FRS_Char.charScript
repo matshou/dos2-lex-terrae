@@ -33,16 +33,18 @@ THEN
 	IF "!c1"
 		IsTagged(__Me, "UNDEAD")
 	THEN
-		IF "!c1&!c2&!c3&!c4"
+		IF "!c1&!c2&!c3&!c4&!c5"
+			CharacterHasStatus(__Me,FRSFull2)
 			CharacterHasStatus(__Me,FRSFull)
 			CharacterHasStatus(__Me,FRSNoHunger)
 			CharacterHasStatus(__Me,FRSHunger)
 			CharacterHasStatus(__Me,FRSstarvation)
 		THEN
 			CharacterApplyStatus(__Me,FRSNoHunger,200,1)
-		ELIF "!c1&!c2"
+		ELIF "!c1&!c2&!c3&!c4"
 			CharacterHasStatus(__Me,FRSquenched)
 			CharacterHasStatus(__Me,FRSNoThirst)
+			CharacterHasStatus(__Me,FRSThirst)
 			CharacterHasStatus(__Me,FRSDehydrated)
 		THEN
 			CharacterApplyStatus(__Me,FRSNoThirst,125,1)
@@ -66,20 +68,20 @@ INT: _StatusTurns
 ON
 OnUseItem(__Me,_Item)
 ACTIONS
-IF "c1&c2&!c3"
+IF "c1&c2&!c3&!c4"
 CharacterIsPlayer(__Me)
 CharacterIsInParty(__Me)
 CharacterIsDead(__Me)
+IsTagged(__Me, "UNDEAD")
 THEN
 	////////////////
 	// Using Food
 	////////////////
-	IF "(c1|c2)&(!c3&!c4&!c5)"
+	IF "(c1|c2)&(!c3&!c4)"
 		IsTagged(_Item, "FOOD")
 		IsTagged(_Item, "INGREDIENT")
 		IsTagged(_Item, "POISONED")
 		IsTagged(_Item, "VOIDTAINTED")
-		IsTagged(__Me, "UNDEAD")
 	THEN
 		////////////////
 		// Vegetables
@@ -163,12 +165,11 @@ THEN
 	////////////////
 	// Using Drink
 	////////////////
-	ELIF "c1&!c2&!c3&!c4&!c5"
+	ELIF "c1&!c2&!c3&!c4"
 		IsTagged(_Item, "DRINK")
 		IsTagged(_Item, "POISONED")
 		IsTagged(_Item, "Potion")
 		IsTagged(_Item, "ALCOHOL")
-		IsTagged(__Me, "UNDEAD")
 	THEN
 		CharacterApplyStatus(__Me,FRSquenched,75,1)
 		CharacterRemoveStatus(__Me,FRSDehydrated)
@@ -272,7 +273,7 @@ THEN
 ENDIF
 
 // Apply Dehydration
-EVENT FRS_Thirst_1
+EVENT FRS_Thirst_2
 ON
 OnCharacterStatusRemoved(__Me,FRSThirst)
 ACTIONS
