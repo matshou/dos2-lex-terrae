@@ -40,14 +40,14 @@ THEN
 			CharacterHasStatus(__Me,FRSHunger)
 			CharacterHasStatus(__Me,FRSstarvation)
 		THEN
-			CharacterApplyStatus(__Me,FRSNoHunger,200,1)
+			CharacterApplyStatus(__Me,FRSNoHunger,350,1)
 		ELIF "!c1&!c2&!c3&!c4"
 			CharacterHasStatus(__Me,FRSquenched)
 			CharacterHasStatus(__Me,FRSNoThirst)
 			CharacterHasStatus(__Me,FRSThirst)
 			CharacterHasStatus(__Me,FRSDehydrated)
 		THEN
-			CharacterApplyStatus(__Me,FRSNoThirst,125,1)
+			CharacterApplyStatus(__Me,FRSNoThirst,250,1)
 		ENDIF
 	ENDIF
 ENDIF
@@ -91,8 +91,8 @@ THEN
 			IsTagged(_Item,"Mixed")
 			IsTagged(_Item, "FOOD")
 		THEN
-			Set(_MaxDuration,188)
-			Set(_MinDuration,113)
+			Set(_MaxDuration,235)
+			Set(_MinDuration,140)
 		////////////////
 		// Meat & Fish
 		////////////////
@@ -102,8 +102,8 @@ THEN
 			IsTagged(_Item,"Mixed")
 			IsTagged(_Item, "FOOD")
 		THEN
-			Set(_MaxDuration,231)
-			Set(_MinDuration,138)
+			Set(_MaxDuration,300)
+			Set(_MinDuration,180)
 		///////////////////////////////////
 		// Non-Food Ingredients & Herbs
 		//////////////////////////////////
@@ -112,8 +112,8 @@ THEN
 			IsTagged(_Item, "INGREDIENT")
 			IsTagged(_Item, "Herb")
 		THEN
-			Set(_MaxDuration,144)
-			Set(_MinDuration,86)
+			Set(_MaxDuration,180)
+			Set(_MinDuration,110)
 		//////////////////////
 		// Food Ingredients
 		//////////////////////
@@ -125,14 +125,14 @@ THEN
 			IsTagged(_Item,"Mixed")
 			IsTagged(_Item,"VEGETABLE")
 		THEN
-			Set(_MaxDuration,163)
-			Set(_MinDuration,98)
+			Set(_MaxDuration,205)
+			Set(_MinDuration,125)
 		////////////////
 		// Combo Food
 		////////////////
 		ELSE
-			Set(_MaxDuration,325)
-			Set(_MinDuration,195)
+			Set(_MaxDuration,405)
+			Set(_MinDuration,245)
 		ENDIF
 		// Calculation a random duration value
 		GetRandomBetween(_FullDuration,_MinDuration,_MaxDuration)
@@ -152,6 +152,7 @@ THEN
 				IsGreaterThen(_FullDuration,250)
 			THEN
 				Subtract(_FullDuration,250)
+				Clamp(_FullDuration,0,150)
 				CharacterApplyStatus(__Me,FRSFull2,_FullDuration,1)
 				CharacterRemoveStatus(__Me,FRSFull)
 			ELSE
@@ -171,7 +172,7 @@ THEN
 		IsTagged(_Item, "Potion")
 		IsTagged(_Item, "ALCOHOL")
 	THEN
-		CharacterApplyStatus(__Me,FRSquenched,75,1)
+		CharacterApplyStatus(__Me,FRSquenched,150,1)
 		CharacterRemoveStatus(__Me,FRSDehydrated)
 		CharacterRemoveStatus(__Me,FRSNoThirst)
 	ENDIF
@@ -191,7 +192,7 @@ IF "c1&c2&!c3"
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
 THEN
-	CharacterApplyStatus(__Me,FRSNoThirst,125,1)
+	CharacterApplyStatus(__Me,FRSNoThirst,250,1)
 ENDIF
 
 // Apply "no hunger"
@@ -204,7 +205,7 @@ IF "c1&c2&!c3"
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
 THEN
-	CharacterApplyStatus(__Me,FRSNoHunger,200,1)
+	CharacterApplyStatus(__Me,FRSNoHunger,350,1)
 ENDIF
 
 //////////////////////////
@@ -239,7 +240,7 @@ IF "c1&c2&!c3&!c4"
 	CharacterHasStatus(__Me,FRSFull)
 THEN
 	CharacterApplyStatus(__Me,FRSHunger,200,1)
-	DisplayText(__Me,%FRS_Hunger,4)
+	DisplayText(__Me,%FRS_Hunger,5)
 ENDIF
 
 // Apply Starvation
@@ -254,7 +255,7 @@ IF "c1&c2&!c3&!c4"
 	CharacterHasStatus(__Me,FRSFull)
 THEN
 	CharacterApplyStatus(__Me,FRSstarvation,-1,1)
-	DisplayText(__Me,%FRS_starv,4)
+	DisplayText(__Me,%FRS_starv,5)
 ENDIF
 
 // Apply Thirst
@@ -268,7 +269,7 @@ IF "c1&c2&!c3&!c4"
 	CharacterIsDead(__Me)
 	CharacterHasStatus(__Me,FRSquenched)
 THEN
-	CharacterApplyStatus(__Me,FRSThirst,-1,1)
+	CharacterApplyStatus(__Me,FRSThirst,175,1)
 	DisplayText(__Me,%FRS_thirst,5)
 ENDIF
 
@@ -475,6 +476,6 @@ IF "c1&c2&!c3&!c4"
 	CharacterIsSummon(__Me)
 	IsTagged(__Me, "UNDEAD")
 THEN
-	CharacterApplyStatus(__Me,FRSNoHunger,200,1)
-	CharacterApplyStatus(__Me,FRSNoThirst,125,1)
+	CharacterApplyStatus(__Me,FRSNoHunger,350,1)
+	CharacterApplyStatus(__Me,FRSNoThirst,250,1)
 ENDIF
