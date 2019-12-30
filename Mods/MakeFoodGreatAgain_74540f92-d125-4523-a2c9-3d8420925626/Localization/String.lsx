@@ -20,6 +20,13 @@
 					<attribute id="UUID" value="FRS_Sat_Str" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
+					<attribute id="Content" value="I am thirsty..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRS_Thirst_Str" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
 					<attribute id="Content" value="It's time to relax..." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />

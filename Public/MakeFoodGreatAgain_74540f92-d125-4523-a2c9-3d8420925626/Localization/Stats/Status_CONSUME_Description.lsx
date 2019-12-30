@@ -27,6 +27,13 @@
 					<attribute id="UUID" value="FRSquenched_Description" type="22" />
 				</node>
 				<node id="TranslatedStringKey">
+					<attribute id="Content" value="Character is thirsty." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+					<attribute id="ExtraData" value="" type="23" />
+					<attribute id="Speaker" value="" type="22" />
+					<attribute id="Stub" value="True" type="19" />
+					<attribute id="UUID" value="FRSThirst_Description" type="22" />
+				</node>
+				<node id="TranslatedStringKey">
 					<attribute id="Content" value="Character is dehydrated." type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
 					<attribute id="ExtraData" value="" type="23" />
 					<attribute id="Speaker" value="" type="22" />

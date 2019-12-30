@@ -4,6 +4,7 @@ FIXEDSTRING: %FRS_Hunger=FRS_Hunger_Str
 FIXEDSTRING: %FRS_starv=FRS_Sat_Str
 FIXEDSTRING: %FRS_toRest=FRS_toRest_Str
 FIXEDSTRING: %FRS_RestOut=FRS_RestOut_Str
+FIXEDSTRING: %FRS_thirst=FRS_Thirst_Str
 EXTERN FLOAT: %FRSHealthIn=1.0
 EVENTS
 
@@ -254,9 +255,25 @@ THEN
 	DisplayText(__Me,%FRS_starv,4)
 ENDIF
 
+// Apply Thirst
 EVENT FRS_Thirst_1
 ON
 OnCharacterStatusRemoved(__Me,FRSNoThirst)
+ACTIONS
+IF "c1&c2&!c3&!c4"
+	CharacterIsPlayer(__Me)
+	CharacterIsInParty(__Me)
+	CharacterIsDead(__Me)
+	CharacterHasStatus(__Me,FRSquenched)
+THEN
+	CharacterApplyStatus(__Me,FRSThirst,-1,1)
+	DisplayText(__Me,%FRS_thirst,5)
+ENDIF
+
+// Apply Dehydration
+EVENT FRS_Thirst_1
+ON
+OnCharacterStatusRemoved(__Me,FRSThirst)
 ACTIONS
 IF "c1&c2&!c3&!c4"
 	CharacterIsPlayer(__Me)
