@@ -362,11 +362,6 @@ IF "c1&c2&!c3&!c4&(c5|c6)"
 THEN
 	CharacterApplyStatus(__Me,FRSMed,-1,1)
 	CharacterAddSourcePoints(__Me,3)
-	IF "!c1"
-	IsTagged(__Me, "UNDEAD")
-	THEN
-	CharacterHeal(__Me,100)
-	ENDIF
 	IF "c1"
 		CharacterHasSkill(__Me, Shout_SpiritVision)
 	THEN
