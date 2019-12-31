@@ -58,7 +58,6 @@ ENDIF
 
 EVENT FRSFull_1
 VARS
-STRING: _DebugText
 ITEM:_Item
 //INT: _TurnOut
 INT: _FullDuration
@@ -136,20 +135,26 @@ THEN
 		ENDIF
 		// Calculation a random duration value
 		GetRandomBetween(_FullDuration,_MinDuration,_MaxDuration)
+
+		// Remove existing status effects
+		SetFlag(__Me,"updatingHunger")
+		CharacterRemoveStatus(__Me,FRSNoHunger)
+		CharacterRemoveStatus(__Me,FRSHunger)
+		CharacterRemoveStatus(__Me,FRSstarvation)
 		IF "c1"
 			GetStatusTurns(__Me,FRSFull2,_StatusTurns)
 		THEN
 			Add(_FullDuration,_StatusTurns)
 			Clamp(_FullDuration,0,150)
-			SetFlag(__Me,"updatingHunger")
+			CharacterRemoveStatus(__Me,FRSFull2)
 			CharacterApplyStatus(__Me,FRSFull2,_FullDuration,1)
 		ELSE
 			IF "c1"
 				GetStatusTurns(__Me,FRSFull,_StatusTurns)
 			THEN
 				Add(_FullDuration,_StatusTurns)
-				SetFlag(__Me,"updatingHunger")
 			ENDIF
+			CharacterRemoveStatus(__Me,FRSFull)
 			IF "c1"
 				IsGreaterThen(_FullDuration,250)
 			THEN
