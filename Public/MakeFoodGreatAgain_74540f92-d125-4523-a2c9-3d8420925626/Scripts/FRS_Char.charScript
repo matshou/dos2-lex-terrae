@@ -141,12 +141,14 @@ THEN
 		THEN
 			Add(_FullDuration,_StatusTurns)
 			Clamp(_FullDuration,0,150)
+			SetFlag(__Me,"updatingHunger")
 			CharacterApplyStatus(__Me,FRSFull2,_FullDuration,1)
 		ELSE
 			IF "c1"
 				GetStatusTurns(__Me,FRSFull,_StatusTurns)
 			THEN
 				Add(_FullDuration,_StatusTurns)
+				SetFlag(__Me,"updatingHunger")
 			ENDIF
 			IF "c1"
 				IsGreaterThen(_FullDuration,250)
@@ -154,15 +156,10 @@ THEN
 				Subtract(_FullDuration,250)
 				Clamp(_FullDuration,0,150)
 				CharacterApplyStatus(__Me,FRSFull2,_FullDuration,1)
-				CharacterRemoveStatus(__Me,FRSFull)
 			ELSE
 				CharacterApplyStatus(__Me,FRSFull,_FullDuration,1)
 			ENDIF
 		ENDIF
-		// Remove neutral and negative effects
-		CharacterRemoveStatus(__Me,FRSHunger)
-		CharacterRemoveStatus(__Me,FRSstarvation)
-		CharacterRemoveStatus(__Me,FRSNoHunger)
 	////////////////
 	// Using Drink
 	////////////////
@@ -200,7 +197,11 @@ EVENT FRSNoHunger_1
 ON
 OnCharacterStatusRemoved(__Me,FRSFull)
 ACTIONS
-IF "c1&c2&!c3"
+IF "c1"
+	HasFlag(__Me,"updatingHunger")
+THEN
+	ClearFlag(__Me,"updatingHunger")
+ELIF "c1&c2&!c3"
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
@@ -216,7 +217,11 @@ EVENT FRSHunger_0
 ON
 OnCharacterStatusRemoved(__Me,FRSFull2)
 ACTIONS
-IF "c1&c2&!c3"
+IF "c1"
+	HasFlag(__Me,"updatingHunger")
+THEN
+	ClearFlag(__Me,"updatingHunger")
+ELIF "c1&c2&!c3"
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
@@ -233,11 +238,14 @@ EVENT FRSHunger_1
 ON
 OnCharacterStatusRemoved(__Me,FRSNoHunger)
 ACTIONS
-IF "c1&c2&!c3&!c4"
+IF "c1"
+	HasFlag(__Me,"updatingHunger")
+THEN
+	ClearFlag(__Me,"updatingHunger")
+ELIF "c1&c2&!c3"
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
-	CharacterHasStatus(__Me,FRSFull)
 THEN
 	CharacterApplyStatus(__Me,FRSHunger,200,1)
 	DisplayText(__Me,%FRS_Hunger,5)
@@ -248,11 +256,14 @@ EVENT FRSHunger_2
 ON
 OnCharacterStatusRemoved(__Me,FRSHunger)
 ACTIONS
-IF "c1&c2&!c3&!c4"
+IF "c1"
+	HasFlag(__Me,"updatingHunger")
+THEN
+	ClearFlag(__Me,"updatingHunger")
+ELIF "c1&c2&!c3"
 	CharacterIsPlayer(__Me)
 	CharacterIsInParty(__Me)
 	CharacterIsDead(__Me)
-	CharacterHasStatus(__Me,FRSFull)
 THEN
 	CharacterApplyStatus(__Me,FRSstarvation,-1,1)
 	DisplayText(__Me,%FRS_starv,5)
