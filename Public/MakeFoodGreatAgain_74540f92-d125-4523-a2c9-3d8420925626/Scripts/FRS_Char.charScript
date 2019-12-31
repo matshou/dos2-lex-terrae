@@ -342,8 +342,8 @@ ELIF "!c1&c2"
 	CharacterIsDead(__Me)
 	CharacterHasStatus(__Me,FRSMed)
 THEN
-	CharacterApplyStatus(__Me,FRSRest,900,1)
 	CharacterRemoveStatus(__Me,FRSMed)
+	CharacterApplyStatus(__Me,FRSRest,600,1)
 	StopTimer("Rest0_xTime")
 ENDIF
 
