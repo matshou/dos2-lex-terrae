@@ -360,6 +360,8 @@ IF "c1&c2&!c3&!c4&(c5|c6)"
 	CharacterHasStatus(__Me,LYING)
 	CharacterHasStatus(__Me,SITTING)
 THEN
+	SetFlag(__Me,"_meditating")
+	CharacterRemoveStatus(__Me,FRSRest)
 	CharacterApplyStatus(__Me,FRSMed,-1,1)
 	CharacterAddSourcePoints(__Me,3)
 	IF "c1"
@@ -428,15 +430,16 @@ IF "c1&!c2"
 THEN
 	CharacterRemoveStatus(__Me,SPIRIT_VISION)
 ELIF "!c1"
-	CharacterHasStatus(__Me,FRSRest)
+	HasFlag(__Me,"_meditating")
 THEN
-	DisplayText(__Me,%FRS_RestOut,4)
+	DisplayText(__Me,"Testing",4)
 ENDIF
 
 EVENT Spirit_Vision_CansMed
 ON
 OnCharacterStatusRemoved(__Me,FRSMed)
 ACTIONS
+ClearFlag(__Me,"_meditating")
 IF "c1&(c2|c3)"
 	CharacterHasSkill(__Me,Shout_SpiritVision)
 	CharacterHasStatus(__Me,LYING)
